@@ -108,7 +108,7 @@ class aem_curator::install_dispatcher (
 
   class { '::aem::dispatcher' :
     module_file => "${apache_module_temp_dir}/${apache_module_filename}",
-  } -> file { $docroot_dir:
+  } -> file { '/var/www/html':
     # Set the Docroot owner and group to apache
     # https://docs.adobe.com/docs/en/dispatcher/disp-install.html#Apache Web Server - Configure Apache Web Server for Dispatcher
     ensure => directory,
