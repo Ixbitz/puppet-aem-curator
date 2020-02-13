@@ -297,9 +297,9 @@ class aem_curator::config_author_primary (
     port     => $author_port,
     debug    => false,
     aem_id   => $aem_id,
-  } -> aem_resources::author_primary_set_config { 'Set author-primary config':
-    crx_quickstart_dir => $crx_quickstart_dir,
-    aem_version        => $aem_version,
+#  } -> aem_resources::author_primary_set_config { 'Set author-primary config':
+#    crx_quickstart_dir => $crx_quickstart_dir,
+#    aem_version        => $aem_version,
   } -> service { 'aem-author':
     ensure => 'running',
     enable => true,
