@@ -78,6 +78,23 @@ define aem_curator::config_aem (
       'com.adobe.acs.acs-aem-commons-bundle-twitter',
     ],
     aem_id           => $aem_id,
+  } -> aem_node { "${aem_id}: Create Sling/Granite Content Access Check config node":
+    # Create the Sling/Granite Content Access Check config node and remove the sling tag from the hc.tags as we will not solve the Sling/Granite Content Access Check right now
+    ensure => present,
+    name   => 'com.adobe.granite.repository.hc.impl.content.sling.SlingContentHealthCheck',
+    path   => '/apps/system/config',
+    type   => 'sling:OsgiConfig',
+    aem_id => $aem_id,
+  } -> aem_config_property { "${aem_id}: Configure Sling/Granite Content Access Check":
+    ensure           => present,
+    name             => 'hc.tags',
+    type             => 'String[]',
+    run_mode         => $run_mode,
+    config_node_name => 'com.adobe.granite.repository.hc.impl.content.sling.SlingContentHealthCheck',
+    value            => [
+      'repository',
+    ],
+    aem_id           => $aem_id,
   }
 
   $provisioning_steps = [
