@@ -28,12 +28,13 @@ define aem_curator::config_aem (
       before           => Aem_node["${aem_id}: Create AEM Password Reset Activator config node"],
     }
   } else {
-    aem_curator::config_aem_system_users {"${aem_id}: Change System Users Passwords":
-      aem_id           => $aem_id,
-      aem_system_users => $aem_system_users,
-      credentials_hash => $credentials_hash,
-      before           => Aem_node["${aem_id}: Create AEM Password Reset Activator config node"],
-    }
+    # Disable the until following issue is fixed https://github.com/shinesolutions/puppet-aem-resources/issues/82
+    # aem_curator::config_aem_system_users {"${aem_id}: Change System Users Passwords":
+    #   aem_id           => $aem_id,
+    #   aem_system_users => $aem_system_users,
+    #   credentials_hash => $credentials_hash,
+    #   before           => Aem_node["${aem_id}: Create AEM Password Reset Activator config node"],
+    # }
   }
 
   aem_node { "${aem_id}: Create AEM Password Reset Activator config node":
