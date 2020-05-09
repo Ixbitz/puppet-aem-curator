@@ -114,6 +114,8 @@ class aem_curator::config_publish (
   # updating the crx-quickstart/bin/start-env. If not enabled we update
   # start-env as usual.
   if $enable_aem_reconfiguration {
+
+    warning("In the enable_aem_reconfiguration block")
     aem_curator::reconfig_pre_aem{ "${aem_id}: Execute Pre-reconfiguration for AEM":
       aem_base                          => $aem_base,
       aem_id                            => $aem_id,
@@ -177,6 +179,7 @@ class aem_curator::config_publish (
   }
 
   if $jvm_mem_opts {
+    warning("In the jvm_mem_opts block")
     file_line { "${aem_id}: Set JVM memory opts":
       ensure => present,
       path   => "${crx_quickstart_dir}/bin/start-env",
@@ -186,6 +189,7 @@ class aem_curator::config_publish (
   }
 
   if $jmxremote_port {
+    warning("In the jmxremote_port block")
     file_line { "${aem_id}: enable JMXRemote":
       ensure => present,
       path   => "${crx_quickstart_dir}/bin/start-env",
@@ -196,6 +200,7 @@ class aem_curator::config_publish (
   }
 
   if $jvm_opts {
+    warning("In the jvm_opts block")
     file_line { "${aem_id}: Add custom JVM OPTS settings":
       ensure => present,
       path   => "${crx_quickstart_dir}/bin/start-env",
@@ -206,6 +211,7 @@ class aem_curator::config_publish (
   }
 
   if $enable_post_start_sleep {
+    warning("In the enable_post_start_sleep block")
     exec { "${aem_id}: Sleep ${post_start_sleep_seconds} seconds after starting AEM Service":
       command => "sleep ${post_start_sleep_seconds}",
       require => Service['aem-publish'],
