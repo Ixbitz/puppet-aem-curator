@@ -179,5 +179,6 @@ define aem_curator::config_aem (
     truststore          => '/usr/java/default/jre/lib/security/cacerts',
     truststore_password => 'changeit',
     aem_id              => $aem_id,
+    timeout             => 600000,
   }
 }
